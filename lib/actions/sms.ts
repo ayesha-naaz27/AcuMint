@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { parseSms } from '@/lib/llm/parse-sms';
 import { getCategories } from '@/lib/db/categories';
+import { embed, buildTransactionEmbeddingText } from '@/lib/embeddings/embed';
 
 export async function ingestSms(rawText: string) {
   const text = rawText.trim();
@@ -35,6 +36,20 @@ export async function ingestSms(rawText: string) {
   );
   const category_id = matched?.id ?? null;
 
+  let embedding: number[] | null = null;
+  try {
+    const embText = buildTransactionEmbeddingText({
+      merchant: parsed.merchant,
+      notes: null,
+      direction: parsed.direction,
+      amount: parsed.amount,
+      category_name: matched?.name ?? null,
+    });
+    embedding = await embed(embText);
+  } catch (e) {
+    console.warn('Embedding failed on SMS ingest:', e);
+  }
+
   const { error } = await supabase.from('transactions').insert({
     user_id: user.id,
     amount: parsed.amount,
@@ -45,6 +60,7 @@ export async function ingestSms(rawText: string) {
     occurred_at: parsed.occurred_at ?? new Date().toISOString(),
     source: 'sms',
     raw_text: text,
+    embedding: embedding as unknown as string | null,
   });
 
   if (error) {

@@ -1,7 +1,17 @@
-import type { NextConfig } from "next";
+// next.config.ts
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  serverExternalPackages: ['@xenova/transformers'],
+  webpack: (config) => {
+    // Xenova uses these Node built-ins; mark them as external on the server
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'sharp$': false,
+      'onnxruntime-node$': false,
+    };
+    return config;
+  },
 };
 
 export default nextConfig;

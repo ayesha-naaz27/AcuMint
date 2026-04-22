@@ -31,7 +31,7 @@ export function ActivityView({
   }, [transactions, query]);
 
   return (
-    <main className="space-y-6 p-6">
+    <main className="space-y-6 p-6 pb-28">
       <h1 className="text-2xl font-semibold">Activity</h1>
 
       {transactions.length === 0 ? (

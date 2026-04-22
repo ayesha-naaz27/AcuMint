@@ -13,7 +13,7 @@ export default async function SettingsPage() {
   ]);
 
   return (
-    <main className="space-y-6 p-6">
+    <main className="space-y-6 p-6 pb-28">
       <h1 className="text-2xl font-semibold">Settings</h1>
 
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 space-y-1">

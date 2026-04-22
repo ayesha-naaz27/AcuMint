@@ -29,7 +29,7 @@ export default async function HomePage() {
   const emailPrefix = user?.email?.split('@')[0] ?? 'there';
 
   return (
-    <main className="space-y-6 p-6">
+    <main className="space-y-6 p-6 pb-28">
       <header className="space-y-1">
         <p className="text-sm text-zinc-400">{greeting()}</p>
         <h1 className="text-2xl font-semibold">{emailPrefix}</h1>

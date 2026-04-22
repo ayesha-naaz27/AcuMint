@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
+import { embed, buildTransactionEmbeddingText } from '@/lib/embeddings/embed';
 
 const TransactionInputSchema = z.object({
   amount: z.coerce.number().positive('Amount must be greater than zero'),
@@ -23,8 +24,30 @@ export async function createTransaction(input: unknown) {
 
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    return { ok: false as const, error: 'Not signed in' };
+  if (!user) return { ok: false as const, error: 'Not signed in' };
+
+  let categoryName: string | null = null;
+  if (parsed.data.category_id) {
+    const { data: cat } = await supabase
+      .from('categories')
+      .select('name')
+      .eq('id', parsed.data.category_id)
+      .single();
+    categoryName = cat?.name ?? null;
+  }
+
+  let embedding: number[] | null = null;
+  try {
+    const text = buildTransactionEmbeddingText({
+      merchant: parsed.data.merchant,
+      notes: parsed.data.notes ?? null,
+      direction: parsed.data.direction,
+      amount: parsed.data.amount,
+      category_name: categoryName,
+    });
+    embedding = await embed(text);
+  } catch (e) {
+    console.warn('Embedding failed, inserting without vector:', e);
   }
 
   const { error } = await supabase.from('transactions').insert({
@@ -36,6 +59,7 @@ export async function createTransaction(input: unknown) {
     occurred_at: new Date(parsed.data.occurred_at).toISOString(),
     notes: parsed.data.notes || null,
     source: 'manual',
+    embedding: embedding as unknown as string | null,
   });
 
   if (error) {
@@ -45,7 +69,6 @@ export async function createTransaction(input: unknown) {
 
   revalidatePath('/');
   revalidatePath('/activity');
-
   return { ok: true as const };
 }
 
