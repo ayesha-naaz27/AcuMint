@@ -31,7 +31,7 @@ export async function POST() {
         notes: t.notes,
         direction: t.direction as 'debit' | 'credit',
         amount: Number(t.amount),
-        category_name: (t.category as { name: string } | null)?.name ?? null,
+        category_name: (t.category as unknown as { name: string } | null)?.name ?? null,
       });
       const vec = await embed(text);
       const { error: updateErr } = await supabase

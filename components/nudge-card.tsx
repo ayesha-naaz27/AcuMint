@@ -26,7 +26,7 @@ export function NudgeCard({ nudge }: { nudge: Nudge }) {
       };
 
   function dismiss() {
-    startTransition(() => dismissNudge(nudge.id));
+    startTransition(async () => { await dismissNudge(nudge.id); });
   }
 
   return (

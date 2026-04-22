@@ -68,7 +68,7 @@ export function DailySpendLine({
                 borderRadius: 12,
                 fontSize: 12,
               }}
-              formatter={(v: number) => formatINR(v)}
+              formatter={(v) => (typeof v === 'number' ? formatINR(v) : '')}
             />
             <Line
               type="monotone"

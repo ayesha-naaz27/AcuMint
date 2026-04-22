@@ -170,7 +170,7 @@ function summarizeToolResult(toolName: string, result: unknown): string {
   ) {
     return 'Tool call failed.';
   }
-  const data = (result as { data: unknown }).data;
+  const data = (result as unknown as { data: unknown }).data;
   if (toolName === 'query_transactions' && typeof data === 'object' && data) {
     return `Found ${(data as { count: number }).count} transaction(s).`;
   }

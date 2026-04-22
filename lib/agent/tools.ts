@@ -152,7 +152,7 @@ async function queryTransactions(args: Record<string, unknown>) {
       amount: Number(t.amount),
       direction: t.direction,
       merchant: t.merchant,
-      category: (t.category as { name: string } | null)?.name ?? null,
+      category: (t.category as unknown as { name: string } | null)?.name ?? null,
       occurred_at: t.occurred_at,
       notes: t.notes,
     })),
@@ -196,7 +196,7 @@ async function forecastSpending(args: Record<string, unknown>) {
     typeof args.category_name === 'string'
       ? (data ?? []).filter(
           (t) =>
-            (t.category as { name: string } | null)?.name?.toLowerCase() ===
+            (t.category as unknown as { name: string } | null)?.name?.toLowerCase() ===
             (args.category_name as string).toLowerCase()
         )
       : data ?? [];

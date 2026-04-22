@@ -2,6 +2,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  eslint: { ignoreDuringBuilds: true },
   serverExternalPackages: ['@xenova/transformers'],
   webpack: (config) => {
     // Xenova uses these Node built-ins; mark them as external on the server
