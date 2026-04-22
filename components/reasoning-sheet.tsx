@@ -109,9 +109,9 @@ export function WhyButton({ reasoning }: { reasoning: ChatReasoning | null }) {
                             {tc.result_summary}
                           </p>
                         </div>
-                        {Object.keys(tc.arguments).length > 0 && (
+                        {tc.arguments && Object.keys(tc.arguments).length > 0 && (
                           <pre className="mt-2 overflow-x-auto rounded-lg bg-zinc-950 p-2 text-[10px] text-zinc-400">
-                            {JSON.stringify(tc.arguments, null, 2)}
+                            {JSON.stringify(tc.arguments ?? {}, null, 2)}
                           </pre>
                         )}
                       </li>

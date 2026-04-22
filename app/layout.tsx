@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   title: 'FinSight',
   description: 'Your agentic personal finance decision engine',
   manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'FinSight',
+  },
+  icons: {
+    apple: '/icon-192.png',
+  },
 };
 
 export const viewport: Viewport = {

@@ -1,10 +1,19 @@
+// app/(app)/page.tsx
 import { createClient } from '@/lib/supabase/server';
-import { getTransactions, getCurrentMonthSpend } from '@/lib/db/transactions';
+import {
+  getTransactions,
+  getCurrentMonthSpend,
+} from '@/lib/db/transactions';
 import { getCategories } from '@/lib/db/categories';
 import { getBudgetStatus } from '@/lib/db/budgets';
+import { getActiveNudges } from '@/lib/db/nudges';
 import { TransactionRow } from '@/components/transaction-row';
 import { AddTransactionSheet } from '@/components/add-transaction-sheet';
-import { BudgetAlert, BudgetProgressList } from '@/components/budget-progress';
+import {
+  BudgetAlert,
+  BudgetProgressList,
+} from '@/components/budget-progress';
+import { NudgeCard } from '@/components/nudge-card';
 import { formatINR } from '@/lib/format';
 
 function greeting() {
@@ -19,12 +28,14 @@ export default async function HomePage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  const [monthSpend, recent, categories, budgetStatuses] = await Promise.all([
-    getCurrentMonthSpend(),
-    getTransactions(5),
-    getCategories(),
-    getBudgetStatus(),
-  ]);
+  const [monthSpend, recent, categories, budgetStatuses, nudges] =
+    await Promise.all([
+      getCurrentMonthSpend(),
+      getTransactions(5),
+      getCategories(),
+      getBudgetStatus(),
+      getActiveNudges(),
+    ]);
 
   const emailPrefix = user?.email?.split('@')[0] ?? 'there';
 
@@ -34,6 +45,14 @@ export default async function HomePage() {
         <p className="text-sm text-zinc-400">{greeting()}</p>
         <h1 className="text-2xl font-semibold">{emailPrefix}</h1>
       </header>
+
+      {nudges.length > 0 && (
+        <section className="space-y-2">
+          {nudges.map((n) => (
+            <NudgeCard key={n.id} nudge={n} />
+          ))}
+        </section>
+      )}
 
       <BudgetAlert statuses={budgetStatuses} />
 

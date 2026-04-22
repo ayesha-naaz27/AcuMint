@@ -1,8 +1,10 @@
+// app/(app)/settings/page.tsx
 import { createClient } from '@/lib/supabase/server';
 import { getCategories } from '@/lib/db/categories';
 import { getBudgets } from '@/lib/db/budgets';
 import { Button } from '@/components/ui/button';
 import { BudgetManager } from './budget-manager';
+import { GenerateNudgeButton } from './generate-nudge-button';
 
 export default async function SettingsPage() {
   const supabase = await createClient();
@@ -24,6 +26,14 @@ export default async function SettingsPage() {
       </section>
 
       <BudgetManager categories={categories} budgets={budgets} />
+
+      <section className="space-y-3">
+        <h2 className="text-sm font-medium text-zinc-400">Nudges</h2>
+        <GenerateNudgeButton />
+        <p className="text-xs text-zinc-600">
+          Nudges are also generated automatically at 7:30 AM IST daily.
+        </p>
+      </section>
 
       <section>
         <form action="/auth/signout" method="post">
