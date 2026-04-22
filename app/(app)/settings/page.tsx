@@ -1,14 +1,19 @@
 import { createClient } from '@/lib/supabase/server';
+import { getCategories } from '@/lib/db/categories';
+import { getBudgets } from '@/lib/db/budgets';
 import { Button } from '@/components/ui/button';
+import { BudgetManager } from './budget-manager';
 
 export default async function SettingsPage() {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
+  const [categories, budgets] = await Promise.all([
+    getCategories(),
+    getBudgets(),
+  ]);
 
   return (
-    <main className="p-6 space-y-6">
+    <main className="space-y-6 p-6">
       <h1 className="text-2xl font-semibold">Settings</h1>
 
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 space-y-1">
@@ -18,11 +23,9 @@ export default async function SettingsPage() {
         <p className="font-mono text-sm">{user?.email}</p>
       </section>
 
-      <section className="space-y-3">
-        <p className="text-sm text-zinc-500">
-          Budgets and nudge sensitivity — coming in Day 2.
-        </p>
+      <BudgetManager categories={categories} budgets={budgets} />
 
+      <section>
         <form action="/auth/signout" method="post">
           <Button
             type="submit"

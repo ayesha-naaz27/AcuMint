@@ -1,8 +1,10 @@
 import { createClient } from '@/lib/supabase/server';
 import { getTransactions, getCurrentMonthSpend } from '@/lib/db/transactions';
 import { getCategories } from '@/lib/db/categories';
+import { getBudgetStatus } from '@/lib/db/budgets';
 import { TransactionRow } from '@/components/transaction-row';
 import { AddTransactionSheet } from '@/components/add-transaction-sheet';
+import { BudgetAlert, BudgetProgressList } from '@/components/budget-progress';
 import { formatINR } from '@/lib/format';
 
 function greeting() {
@@ -17,10 +19,11 @@ export default async function HomePage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  const [monthSpend, recent, categories] = await Promise.all([
+  const [monthSpend, recent, categories, budgetStatuses] = await Promise.all([
     getCurrentMonthSpend(),
     getTransactions(5),
     getCategories(),
+    getBudgetStatus(),
   ]);
 
   const emailPrefix = user?.email?.split('@')[0] ?? 'there';
@@ -32,6 +35,8 @@ export default async function HomePage() {
         <h1 className="text-2xl font-semibold">{emailPrefix}</h1>
       </header>
 
+      <BudgetAlert statuses={budgetStatuses} />
+
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
         <p className="text-xs uppercase tracking-wider text-zinc-500">
           Spent this month
@@ -40,6 +45,8 @@ export default async function HomePage() {
           {formatINR(monthSpend)}
         </p>
       </section>
+
+      <BudgetProgressList statuses={budgetStatuses} />
 
       <section className="space-y-3">
         <h2 className="text-sm font-medium text-zinc-400">Recent</h2>

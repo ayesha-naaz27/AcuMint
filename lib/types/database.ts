@@ -38,3 +38,14 @@ export type Budget = {
   created_at: string;
   updated_at: string;
 };
+
+export type BudgetWithCategory = Budget & {
+  category: Pick<Category, 'id' | 'name' | 'icon' | 'color'>;
+};
+
+export type BudgetStatus = BudgetWithCategory & {
+  spent: number;
+  remaining: number;
+  percentUsed: number;
+  level: 'ok' | 'warning' | 'breach';
+};
