@@ -1,10 +1,12 @@
-export default function ActivityPage() {
-  return (
-    <main className="p-6 space-y-6">
-      <h1 className="text-2xl font-semibold">Activity</h1>
-      <p className="text-sm text-zinc-500">
-        Transaction list and charts — coming in Day 2.
-      </p>
-    </main>
-  );
+import { getTransactions } from '@/lib/db/transactions';
+import { getCategories } from '@/lib/db/categories';
+import { ActivityView } from './activity-view';
+
+export default async function ActivityPage() {
+  const [transactions, categories] = await Promise.all([
+    getTransactions(),
+    getCategories(),
+  ]);
+
+  return <ActivityView transactions={transactions} categories={categories} />;
 }
