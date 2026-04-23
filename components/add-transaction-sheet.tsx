@@ -63,7 +63,7 @@ export function AddTransactionSheet({ categories }: { categories: Category[] }) 
       <SheetTrigger asChild>
         <button
           aria-label="Add transaction"
-          className="fixed bottom-24 right-[calc(50%-220px)] z-30 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-zinc-950 shadow-lg transition-transform hover:bg-emerald-400 active:scale-95"
+          className="fixed bottom-24 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-zinc-950 shadow-lg transition-transform hover:bg-emerald-400 active:scale-95"
         >
           <Plus className="h-6 w-6" strokeWidth={2.5} />
         </button>
