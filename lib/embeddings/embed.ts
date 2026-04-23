@@ -4,11 +4,9 @@ let extractor: FeatureExtractionPipeline | null = null;
 
 async function getExtractor(): Promise<FeatureExtractionPipeline> {
   if (extractor) return extractor;
-  extractor = await pipeline(
-    'feature-extraction',
-    'Xenova/all-MiniLM-L6-v2'
-  );
-  return extractor;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2') as any;
+  return extractor!;
 }
 
 export async function embed(text: string): Promise<number[]> {
