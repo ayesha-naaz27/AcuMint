@@ -76,7 +76,7 @@ export function AskView({ initialHistory }: { initialHistory: ChatMessage[] }) {
   const isEmpty = messages.length === 0 && !isPending;
 
   return (
-    <div className="flex h-[calc(100dvh-6rem)] flex-col">
+    <div className="flex h-[calc(100dvh-4rem)] flex-col">
       {/* Scrollable message area */}
       <div className="flex-1 overflow-y-auto px-6 pt-6">
         {isEmpty ? (
@@ -100,7 +100,7 @@ export function AskView({ initialHistory }: { initialHistory: ChatMessage[] }) {
       )}
 
       {/* Composer */}
-      <div className="border-t border-zinc-800 bg-zinc-950 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] mb-16">
+      <div className="border-t border-zinc-800 bg-zinc-950 p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
         <div className="flex items-end gap-2">
           <Textarea
             ref={textareaRef}
