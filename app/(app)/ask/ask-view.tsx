@@ -132,7 +132,7 @@ export function AskView({ initialHistory }: { initialHistory: ChatMessage[] }) {
 
 function EmptyState({ onPick }: { onPick: (p: string) => void }) {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-6 pb-24 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-6 pb-6 text-center">
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10">
         <Sparkles className="h-6 w-6 text-emerald-400" />
       </div>
