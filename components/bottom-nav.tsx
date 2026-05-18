@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Activity, MessageSquare, Settings } from 'lucide-react';
+import { Home, Activity, MessageSquare, Settings, BarChart2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const tabs = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/activity', label: 'Activity', icon: Activity },
+  { href: '/analytics', label: 'Analytics', icon: BarChart2 },
   { href: '/ask', label: 'Ask', icon: MessageSquare },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];

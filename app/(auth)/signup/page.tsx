@@ -48,7 +48,7 @@ export default function SignupPage() {
     <div className="w-full max-w-sm space-y-8">
       <div className="space-y-2 text-center">
         <h1 className="font-mono text-4xl font-semibold text-emerald-500">
-          FinSight
+          AcuMint
         </h1>
         <p className="text-sm text-zinc-400">Create your account</p>
       </div>

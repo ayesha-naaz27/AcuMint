@@ -41,8 +41,11 @@ export default function LoginPage() {
     <div className="w-full max-w-sm space-y-8">
       <div className="space-y-2 text-center">
         <h1 className="font-mono text-4xl font-semibold text-emerald-500">
-          FinSight
+          AcuMint
         </h1>
+        <p className="text-xs text-zinc-500">
+          An AI-Based Personal Finance Assistant Using Retrieval-Augmented Generation for Indian Users
+        </p>
         <p className="text-sm text-zinc-400">
           Sign in to your account
         </p>

@@ -4,7 +4,7 @@ import { embed } from '@/lib/embeddings/embed';
 import { TOOL_SCHEMAS, executeTool } from './tools';
 import { formatINR } from '@/lib/format';
 
-const SYSTEM_PROMPT = `You are FinSight, a personal finance assistant for an Indian user.
+const SYSTEM_PROMPT = `You are AcuMint, a personal finance assistant for an Indian user.
 
 You have access to four tools: query_transactions, calculate_budget_health, forecast_spending, detect_recurring. Call them as needed to answer the user's question accurately.
 

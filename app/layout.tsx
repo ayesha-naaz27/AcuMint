@@ -5,13 +5,13 @@ import { GeistMono } from 'geist/font/mono';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'FinSight',
+  title: 'AcuMint',
   description: 'Your agentic personal finance decision engine',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'FinSight',
+    title: 'AcuMint',
   },
   icons: {
     apple: '/icon-192.png',

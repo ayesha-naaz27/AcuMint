@@ -1,6 +1,6 @@
 {
-  "name": "FinSight",
-  "short_name": "FinSight",
+  "name": "AcuMint",
+  "short_name": "AcuMint",
   "description": "Your agentic personal finance decision engine",
   "start_url": "/",
   "display": "standalone",
