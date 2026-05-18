@@ -6,7 +6,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'AcuMint',
-  description: 'Your agentic personal finance decision engine',
+  description: 'Track it. Ask it. Manage it.',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,

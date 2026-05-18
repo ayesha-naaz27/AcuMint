@@ -1,7 +1,7 @@
 {
   "name": "AcuMint",
   "short_name": "AcuMint",
-  "description": "Your agentic personal finance decision engine",
+  "description": "Track it. Ask it. Manage it.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#09090b",

@@ -44,7 +44,7 @@ export default function LoginPage() {
           AcuMint
         </h1>
         <p className="text-xs text-zinc-500">
-          An AI-Based Personal Finance Assistant Using Retrieval-Augmented Generation for Indian Users
+          Track it. Ask it. Manage it.
         </p>
         <p className="text-sm text-zinc-400">
           Sign in to your account

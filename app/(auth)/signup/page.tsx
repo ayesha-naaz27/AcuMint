@@ -50,6 +50,9 @@ export default function SignupPage() {
         <h1 className="font-mono text-4xl font-semibold text-emerald-500">
           AcuMint
         </h1>
+        <p className="text-xs text-zinc-500">
+          Track it. Ask it. Manage it.
+        </p>
         <p className="text-sm text-zinc-400">Create your account</p>
       </div>
 
