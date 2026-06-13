@@ -71,3 +71,7 @@ git clone https://github.com/ayesha-naaz27/AcuMint.git
 cd AcuMint
 npm install
 npm run dev
+
+Open `http://localhost:3000` in your browser.
+
+Note: Supabase and Groq API credentials are required to run the project locally.
